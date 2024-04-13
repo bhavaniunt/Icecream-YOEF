@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ice Cream Store</title>
+  <style>
+    /* Add your CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #FFC107;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #FFF;
+      font-size: 32px;
+      margin: 0;
+    }
+
+    #home {
+      background-color: #F9F9F9;
+      padding: 40px;
+      text-align: center;
+    }
+
+    #contact {
+      background-color: #E0E0E0;
+      padding: 40px;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input,
+    textarea {
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    input[type="submit"] {
+      background-color: #FFC107;
+      color: #FFF;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #FFA000;
+    }
+
+    #cart {
+      background-color: #FFF;
+      padding: 40px;
+    }
+
+    .flavor {
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    p {
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #FFC107;
+      color: #FFF;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #FFA000;
+    }
+
+    #search {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    #cart-items {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #checkout {
+      background-color: #4CAF50;
+    }
+
+    #checkout:hover {
+      background-color: #45a049;
+    }
+
+    footer {
+      background-color: #333;
+      color: #FFF;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+  <script>
+    // Add JavaScript code here
+    document.addEventListener("DOMContentLoaded", function() {
+      const cartItems = document.getElementById("cart-items");
+      const checkoutButton = document.getElementById("checkout");
+
+      function addToCart(e) {
+        const flavor = e.target.parentElement;
+        const flavorName = flavor.querySelector("h3").textContent;
+        const price = flavor.querySelector("p:last-child").textContent;
+
+        const listItem = document.createElement("li");
+        listItem.textContent = `${flavorName} - ${price}`;
+        cartItems.appendChild(listItem);
+
+        // Calculate total price
+        let totalPrice = 0;
+        const items = cartItems.querySelectorAll("li");
+        items.forEach(item => {
+          const itemPrice = parseFloat(item.textContent.split("$")[1]);
+          totalPrice += itemPrice;
+        });
+
+        // Display total price
+        alert(`Total Price: $${totalPrice.toFixed(2)}`);
+      }
+
+      function checkout() {
+        const paymentMethod = prompt("Would you like to use debit or credit card?");
+        if (paymentMethod) {
+          alert(`You have chosen to pay with ${paymentMethod}. Thank you for your purchase!`);
+          cartItems.innerHTML = "";
+        }
+      }
+
+      const addButtons = document.querySelectorAll(".flavor button");
+      addButtons.forEach(button => {
+        button.addEventListener("click", addToCart);
+      });
+
+      checkoutButton.addEventListener("click", checkout);
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Ice Cream Store</h1>
+  </header>
+
+  <section id="home">
+    <h1>Welcome to the Ice Cream Store</h1>
+    <p>Explore our delicious flavors and enjoy a refreshing treat!</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="
